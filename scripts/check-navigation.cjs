@@ -4,7 +4,7 @@ const {pathToFileURL}=require('node:url');
 const runtime=process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES||'C:/Users/HomePC/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules';
 const {chromium}=require(path.join(runtime,'playwright'));
 const root=path.resolve(__dirname,'..');
-const url=pathToFileURL(path.join(root,'output/beer-atlas.html')).href;
+const url=pathToFileURL(path.join(root,'index.html')).href;
 const expected=[
  ['start','start','Начало'],['map','start','Карта понятий'],
  ['history-old','history-old','Древность'],['history-new','history-old','крафту'],
@@ -75,9 +75,8 @@ function assert(ok,message){if(!ok)throw Error(message);}
  await page.goto(url+'#school-belgium');await waitForSection('school-belgium');
  const deepLink=await page.evaluate(()=>({headerBottom:document.querySelector('.topnav').getBoundingClientRect().bottom,sectionTop:document.getElementById('school-belgium').getBoundingClientRect().top}));
  assert(deepLink.sectionTop>=deepLink.headerBottom-1,'Deep link hidden by header');
- await page.goto(pathToFileURL(path.join(root,'reference/beer-atlas.html')).href+'#hops');await waitForSection('hops');
  assert(!errors.length,'Browser errors: '+errors.join('; '));
- const report={sectionsChecked:states.length,numbering,boundaryBothDirections:true,layouts,deepLink,nativeHistory:true,mobileMenuEscape:true,linkedVersion:true,errors};
+ const report={sectionsChecked:states.length,numbering,boundaryBothDirections:true,layouts,deepLink,nativeHistory:true,mobileMenuEscape:true,errors};
  fs.writeFileSync(path.join(root,'tmp/navigation-check.json'),JSON.stringify(report,null,2));
  console.log(JSON.stringify(report));await browser.close();
 })().catch(error=>{console.error(error);process.exitCode=1;});

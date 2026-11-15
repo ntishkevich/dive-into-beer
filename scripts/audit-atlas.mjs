@@ -9,7 +9,7 @@ const { default: lighthouse } = await import(new URL('lighthouse/core/index.js',
 const { default: desktopConfig } = await import(new URL('lighthouse/core/config/desktop-config.js', dependencies));
 const { launch } = await import(new URL('chrome-launcher/dist/index.js', dependencies));
 
-const document = await readFile(new URL('../output/beer-atlas.html', import.meta.url));
+const document = await readFile(new URL('../index.html', import.meta.url));
 const sha256 = createHash('sha256').update(document).digest('hex');
 const categories = ['performance', 'accessibility', 'best-practices', 'seo'];
 const metrics = [
@@ -26,7 +26,7 @@ try {
   async function verifyServedPage() {
     const response = await fetch(url);
     assert(response.ok && document.equals(Buffer.from(await response.arrayBuffer())),
-      'Preview content differs from output/beer-atlas.html. Run node scripts/build-atlas.cjs.');
+      'Preview content differs from the index.html snapshot. Run the audit again.');
   }
 
   await mkdir(auditDir, { recursive: true });

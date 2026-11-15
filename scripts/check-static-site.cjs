@@ -4,7 +4,6 @@ const {chromium}=require(path.join(runtime,'playwright'));const root=path.resolv
 const expectedSources=require('../assets/beer-data.json').sources.length;
 (async()=>{
  const html=fs.readFileSync(path.join(root,'index.html'));
- assert(html.equals(fs.readFileSync(path.join(root,'output/beer-atlas.html'))),'Standalone and index differ');
  const server=http.createServer((req,res)=>{
   if(['/beer-project/','/beer-project/index.html'].includes(req.url.split('?')[0])){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});res.end(html);}
   else{res.writeHead(404);res.end('Not found');}

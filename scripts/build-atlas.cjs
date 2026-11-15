@@ -17,22 +17,20 @@ const bySource=Object.fromEntries(d.sources.map(s=>[s.id,s]));
 const sourceNumber = source => String(source.n).padStart(2, '0');
 const sourcePopoverId = source => 'source-popover-' + source.id;
 
-function sourceControl(source, markup, { label, preview = true } = {}) {
+function sourceControl(source, markup, { label } = {}) {
   const ariaLabel = label ? ` aria-label="${e(label)}"` : '';
-  const fallbackClass = preview ? ' class="source-fallback"' : '';
-  const link = `<a${fallbackClass} href="${e(source.url)}"${ariaLabel}>${markup}</a>`;
-  if (!preview) return link;
+  const link = `<a class="source-fallback" href="${e(source.url)}"${ariaLabel}>${markup}</a>`;
   return link + `<button type="button" class="source-trigger" popovertarget="${e(sourcePopoverId(source))}" aria-haspopup="dialog"${ariaLabel}>${markup}</button>`;
 }
 
-function refs(ids, preview = true) {
+function refs(ids) {
   if (!ids?.length) return '';
   const controls = ids.map(id => {
     const source = bySource[id];
     if (!source) throw Error(id);
     const number = `[${sourceNumber(source)}]`;
     const label = `${number} — Источник ${source.n}: ${source.title}`;
-    return sourceControl(source, number, { label, preview });
+    return sourceControl(source, number, { label });
   });
   return '<div class="refs">Источники: ' + controls.join('') + '</div>';
 }
@@ -122,30 +120,19 @@ const outlineLinks=()=>outline.map(([id,group,title,number])=>'<a href="#'+e(id)
 const nav='<nav class="topnav" aria-label="Навигация по атласу"><div class="nav-main"><a class="brand" href="#start" data-section-link="start">ПОГРУЖЕНИЕ В ПИВАС</a><details class="header-index"><summary>Содержание</summary><nav aria-label="Быстрый переход по атласу">'+outlineLinks()+'</nav></details></div><div class="reading-location"><span class="reading-location-label">Сейчас читаете</span><span class="reading-title" data-current-section-title role="status" aria-live="polite" aria-atomic="true">Начало</span></div><div class="reading-progress" aria-hidden="true"><span></span></div></nav>';
 const sidebar='<aside class="atlas-sidebar" aria-label="Оглавление атласа"><p class="index-label">Путеводитель по атласу</p><nav aria-label="Главы атласа">'+outlineLinks()+'</nav></aside>';
 const mobileIndex='<details class="atlas-mobile-index"><summary>Содержание атласа</summary><nav aria-label="Содержание на небольшом экране">'+outlineLinks()+'</nav></details>';
-function doc(body, { standalone = false, title = d.title, atlas = true } = {}) {
-  const styles = standalone
-    ? `<style>\n${css}\n${layoutCss}\n</style>`
-    : '<link rel="stylesheet" href="../assets/beer.css">' +
-      (atlas ? '<link rel="stylesheet" href="../assets/atlas-layout.css">' : '');
-  const skipLink = atlas ? '<a class="skip-link" href="#map">Перейти к содержанию</a>' : '';
-  const data = atlas ? `<script type="application/json" id="compare-data">${compareData}</script>` : '';
-  // Inline modules also run when the standalone page and lesson are opened from disk.
-  const script = atlas ? js + '\n' + navigationJs : js;
+function doc(body) {
+  const styles = `<style>\n${css}\n${layoutCss}\n</style>`;
+  const skipLink = '<a class="skip-link" href="#map">Перейти к содержанию</a>';
+  const data = `<script type="application/json" id="compare-data">${compareData}</script>`;
+  // Embed the module so it also runs when the page is opened from disk.
+  const script = js + '\n' + navigationJs;
   return `<!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="История пива и понятная карта стилей: IPA, APA, Hazy, Gose, sour, лагеры и стауты"><title>${e(title)}</title><link rel="icon" type="image/svg+xml" href="${icon}">${styles}</head><body${atlas ? ' class="atlas-page"' : ''}>${skipLink}${annotateSections(body)}${data}
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="История пива и понятная карта стилей: IPA, APA, Hazy, Gose, sour, лагеры и стауты"><title>${e(d.title)}</title><link rel="icon" type="image/svg+xml" href="${icon}">${styles}</head><body class="atlas-page">${skipLink}${annotateSections(body)}${data}
 <script type="module">${script}</script>
 </body></html>`;
 }
 const atlasBody=nav+'<main id="atlas-content">'+cover+'<div class="atlas-layout">'+sidebar+'<div class="atlas-content">'+mobileIndex+content+practice+sourcesHtml+'</div></div></main>'+sourcePopovers();
-fs.mkdirSync(path.join(root,'reference'),{recursive:true});fs.mkdirSync(path.join(root,'lessons'),{recursive:true});fs.mkdirSync(path.join(root,'output'),{recursive:true});
-fs.writeFileSync(path.join(root,'reference/beer-atlas.html'),doc(atlasBody));
-const standalone = doc(atlasBody, { standalone: true });
-fs.writeFileSync(path.join(root,'output/beer-atlas.html'),standalone);
-const lesson=`<main class="sheet lesson"><nav class="lesson-nav"><a href="../reference/beer-atlas.html">Полный атлас</a><a href="../reference/beer-atlas.html#hops">Сравнение IPA</a><a href="../reference/beer-atlas.html#sour">Кислые стили</a></nav><div class="eyebrow">КОРОТКИЙ РАЗБОР / 5–7 МИНУТ</div><h1 style="font-size:44px">Пять слов из пивного меню</h1><p class="lead">APA, IPA, Hazy, Gose и Sour описывают разные стороны пива. Этот короткий разбор помогает различать их по характеру вкуса.</p><div class="lesson-win">Начнём с главного: какой характер выходит на первый план — хмель, кислотность, солод или дрожжи?</div>${table(['Слово','Главная идея'],[['APA','Американский pale ale: хмель заметен, но баланс обычно умереннее, чем у IPA.'],['IPA','Хмелевая семья с множеством направлений. Не одна неизменная степень горечи.'],['Hazy / NEIPA','Направление IPA с фруктовой ароматикой и мягкой текстурой. Мутность — часть профиля.'],['Gose','Конкретный кислый пшеничный стиль с сдержанными солью и кориандром.'],['Sour','Широкое обозначение кислого пива, а не единственный рецепт.']])}${refs(['apa','ipa','hazy','gose','ba'], false)}<h2 style="margin-top:32px">Разбор на примерах</h2>${quizHtml}<aside class="callout"><div class="label">Подробнее о Hazy IPA</div><p>В <a href="${bySource.hazy.url}">BJCP 21C: Hazy IPA</a> общее впечатление и отличия от соседних стилей описаны в разделах Overall Impression и Style Comparison. Краткое сравнение есть в <a href="../reference/beer-atlas.html#hops">атласе IPA</a>.</p></aside><p style="margin-top:25px">Чтобы закрепить различия, к вопросам полезно вернуться через несколько дней и ответить до открытия атласа. Ещё один способ проверить себя — разобрать названия в реальном пивном меню.</p></main>`;
-fs.writeFileSync(path.join(root,'lessons/0001-reading-beer-menu.html'),doc(lesson, {
-  title: 'Пять слов из пивного меню — Погружение в ПИВАС',
-  atlas: false,
-}));
-fs.writeFileSync(path.join(root,'index.html'),standalone);
-fs.writeFileSync(path.join(root,'.nojekyll'),'');
-console.log(JSON.stringify({standalone:path.join(root,'output/beer-atlas.html'),styles:d.styles.length,sources:d.sources.length}));
+const indexPath = path.join(root, 'index.html');
+fs.writeFileSync(indexPath, doc(atlasBody));
+fs.writeFileSync(path.join(root, '.nojekyll'), '');
+console.log(JSON.stringify({ index: indexPath, styles: d.styles.length, sources: d.sources.length }));
