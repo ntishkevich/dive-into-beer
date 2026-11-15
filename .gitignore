@@ -1,0 +1,14 @@
+/output/
+/tmp/
+/prototypes/
+/NOTES.md
+/assets/history-expansion.json
+/assets/tales-expansion.json
+/scripts/expand-history.cjs
+/scripts/expand-tales.cjs
+
+node_modules/
+__pycache__/
+/.venv/
+.DS_Store
+Thumbs.db

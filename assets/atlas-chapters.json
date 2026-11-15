@@ -1,0 +1,172 @@
+[
+  {
+    "group": "start",
+    "title": "Карта понятий",
+    "sections": [
+      {
+        "id": "map",
+        "readingTitle": "Карта понятий"
+      }
+    ]
+  },
+  {
+    "group": "history-old",
+    "title": "История",
+    "sections": [
+      {
+        "id": "history-old",
+        "readingTitle": "История · Древность и Средневековье"
+      },
+      {
+        "id": "history-new",
+        "readingTitle": "История · От портера к современному крафту"
+      },
+      {
+        "id": "history-regional",
+        "readingTitle": "История · Россия и Беларусь"
+      }
+    ]
+  },
+  {
+    "group": "school-central",
+    "title": "Пивные школы",
+    "sections": [
+      {
+        "id": "school-central",
+        "readingTitle": "Школы · Германия и Чехия"
+      },
+      {
+        "id": "school-belgium",
+        "readingTitle": "Школы · Бельгия, ламбик и крик"
+      },
+      {
+        "id": "school-islands",
+        "readingTitle": "Школы · Британия и Ирландия"
+      },
+      {
+        "id": "school-america",
+        "readingTitle": "Школы · США и Hazy IPA"
+      },
+      {
+        "id": "school-russia",
+        "readingTitle": "Школы · Россия"
+      },
+      {
+        "id": "school-belarus",
+        "readingTitle": "Школы · Беларусь"
+      }
+    ]
+  },
+  {
+    "group": "hops",
+    "title": "APA, IPA и Hazy",
+    "sections": [
+      {
+        "id": "hops",
+        "readingTitle": "Стили · APA, IPA, Hazy и Double"
+      }
+    ]
+  },
+  {
+    "group": "sour",
+    "title": "Кислые стили",
+    "sections": [
+      {
+        "id": "sour",
+        "readingTitle": "Кислое · Гозе и современные сауэры"
+      },
+      {
+        "id": "wild",
+        "readingTitle": "Кислое · Ламбик, гёз и крик"
+      }
+    ]
+  },
+  {
+    "group": "lagers",
+    "title": "Другие стили",
+    "sections": [
+      {
+        "id": "lagers",
+        "readingTitle": "Стили · Лагеры"
+      },
+      {
+        "id": "yeasty",
+        "readingTitle": "Стили · Пшеница и бельгийские эли"
+      },
+      {
+        "id": "dark",
+        "readingTitle": "Стили · Портер и стаут"
+      }
+    ]
+  },
+  {
+    "group": "brew",
+    "title": "Как рождается вкус",
+    "sections": [
+      {
+        "id": "brew",
+        "readingTitle": "Пивоварение · От сырья к вкусу"
+      }
+    ]
+  },
+  {
+    "group": "label",
+    "title": "Язык этикеток",
+    "sections": [
+      {
+        "id": "label",
+        "readingTitle": "Этикетки · Сокращения и состав"
+      }
+    ]
+  },
+  {
+    "group": "myths",
+    "title": "Пивные байки",
+    "sections": [
+      {
+        "id": "myths",
+        "readingTitle": "Памятка · Истории и пивные байки"
+      },
+      {
+        "id": "myths-inspectors",
+        "readingTitle": "Памятка · Кожаные штаны и козёл"
+      },
+      {
+        "id": "myths-cities",
+        "readingTitle": "Памятка · Пльзень и договор Guinness"
+      },
+      {
+        "id": "myths-culture",
+        "readingTitle": "Памятка · Статистика и гимн Нинкаси"
+      },
+      {
+        "id": "myths-brief",
+        "readingTitle": "Памятка · Короткие ответы для меню"
+      },
+      {
+        "id": "quick",
+        "readingTitle": "Памятка · Шпаргалка для меню"
+      }
+    ]
+  },
+  {
+    "group": "practice",
+    "title": "Самопроверка",
+    "sections": [
+      {
+        "id": "practice",
+        "readingTitle": "Самопроверка"
+      }
+    ]
+  },
+  {
+    "group": "sources",
+    "title": "Источники",
+    "sections": [
+      {
+        "id": "sources",
+        "readingTitle": "Источники"
+      }
+    ]
+  }
+]
