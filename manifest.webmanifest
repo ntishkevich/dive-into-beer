@@ -1,0 +1,29 @@
+{
+  "id": "/dive-into-beer/",
+  "name": "Погружение в ПИВАС",
+  "short_name": "ПИВАС",
+  "lang": "ru",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "theme_color": "#183b34",
+  "background_color": "#faf6ed",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon-mask.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

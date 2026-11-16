@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-56 -24 186 186">
+  <style>
+    @media (prefers-color-scheme: dark) {
+      .tile { fill: #faf6ed; }
+      .rim { stroke: #183b34; stroke-opacity: .9; }
+      .foam { stroke: #183b34; stroke-width: 2; }
+    }
+  </style>
+  <rect class="tile" x="-56" y="-24" width="186" height="186" rx="24" fill="#183b34"/>
+  <path d="M0 0H74L65 146Q37 156 9 146Z" fill="#d69a2c"/>
+  <path d="M8 17L15 137" fill="none" stroke="#fffdf7" stroke-opacity=".36" stroke-width="4"/>
+  <path class="foam" d="M0 0Q8 -16 18 -6Q26 -20 37 -7Q49 -21 58 -6Q69 -17 74 0V13H0Z" fill="#f5edda"/>
+  <path class="rim" d="M0 0L9 146Q37 156 65 146L74 0" fill="none" stroke="#fffdf7" stroke-width="2" stroke-opacity=".6"/>
+</svg>

@@ -75,9 +75,9 @@
 
 ## Где выполнять
 
-Основной источник — [assets/beer-data.json](../assets/beer-data.json): `pages` по стабильному `id`, карточки `styles`, аннотации `sources`. ID и ссылки сохраняются при правке текста. Блоки одной страницы нужно читать целиком.
+Разделы `pages` и карточки `styles` хранятся в [assets/beer-data.json](../assets/beer-data.json). Названия, ссылки и аннотации источников редактируй в [assets/beer-sources.md](../assets/beer-sources.md). Сохраняй номера и ID источников при правке текста. Блоки одной страницы нужно читать целиком.
 
-Обложка и часть интерфейса — [scripts/build-atlas.cjs](../scripts/build-atlas.cjs); печатная версия — [scripts/build-pdf.py](../scripts/build-pdf.py). Нумерация сайта — [assets/atlas-chapters.json](../assets/atlas-chapters.json). Готовые `index.html`, HTML в `output` и PDF не являются единственным местом правки.
+Обложку и интерфейс формирует [scripts/build_atlas.py](../scripts/build_atlas.py), печатную версию — [scripts/build_pdf.py](../scripts/build_pdf.py). Нумерация сайта хранится в [assets/atlas-chapters.json](../assets/atlas-chapters.json). После правки исходников пересобери HTML и PDF.
 
 Порядок исполнения: P1 → конкретные P2 → сквозные P2 → P3. Пункты с новым фактом выполняются после проверки источников. Если факт не подтверждается, выбирается указанная альтернатива сокращения; неизвестное не заполняется выдумкой.
 

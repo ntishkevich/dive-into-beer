@@ -12,18 +12,21 @@
 
 ## Публикация на GitHub Pages
 
-1. Если публикуете из архива, распакуйте его в корень репозитория. Файл `index.html` должен находиться на верхнем уровне.
+1. Если публикуете из архива, распакуйте его в корень репозитория. Сохраните расположение файлов.
 2. В репозитории откройте **Settings → Pages**.
 3. В разделе **Build and deployment** выберите **Deploy from a branch**.
 4. Выберите ветку с файлами сайта и папку **/(root)**, затем нажмите **Save**.
 
-Файл `.nojekyll` отключает обработку Jekyll. Страница не зависит от имени репозитория и не использует абсолютные пути к ресурсам.
+Файл `.nojekyll` отключает обработку Jekyll. Метаданные атласа используют публичный адрес проекта на GitHub Pages.
 
 Официальные инструкции: [создание сайта](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site) и [выбор источника публикации](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 
 ## Состав архива
 
 - `index.html` — готовый сайт.
+- `assets/social-cover.jpg` — обложка для предпросмотра ссылки.
+- `favicon.ico`, `icon.svg`, `apple-touch-icon.png` — иконки браузера и iOS.
+- `manifest.webmanifest` и перечисленные в нём иконки — файлы для ярлыка сайта.
 - `.nojekyll` — файл для публикации без обработки Jekyll.
 - `README.md` — инструкция по просмотру и публикации.
 

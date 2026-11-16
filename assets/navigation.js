@@ -100,19 +100,9 @@ function initNavigation() {
     const link = event.target.closest('a[href^="#"]');
     const contents = link?.closest('.header-index, .atlas-mobile-index');
     if (contents) contents.open = false;
-    link?.closest('.source-popover')?.hidePopover?.();
   });
 
   document.addEventListener('keydown', event => {
-    if (event.key === 'Tab' && !event.defaultPrevented) {
-      const popover = event.target.closest('.source-popover');
-      if (popover) {
-        // Let the browser move focus before dismissing the non-modal popover.
-        requestAnimationFrame(() => {
-          if (!popover.contains(document.activeElement)) popover.hidePopover();
-        });
-      }
-    }
     if (event.key !== 'Escape' || !menu.open) return;
     menu.open = false;
     menu.querySelector('summary').focus();

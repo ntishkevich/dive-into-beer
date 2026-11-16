@@ -370,39 +370,66 @@ strong {
 }
 
 .timeline {
-  margin: 30px 0 20px;
+  --timeline-date-column: 10.5rem;
+  --timeline-columns: var(--timeline-date-column) minmax(0, 1fr);
+  --timeline-gap: 1.25rem;
+  --timeline-margin-start: 1.875rem;
+  --timeline-margin-end: 1.25rem;
+  --timeline-event-padding: 1.0625rem;
+  --timeline-rule-width: 1px;
+  --timeline-date-size: 1.5rem;
+  --timeline-date-leading: 1.2;
+  --timeline-title-size: 1.5rem;
+  --timeline-title-gap: .4375rem;
+  --timeline-text-size: .875rem;
+  --timeline-source-gap: .375rem;
+
+  margin-block: var(--timeline-margin-start) var(--timeline-margin-end);
   list-style: none;
   padding: 0;
 }
 
-.timeline li {
-  position: relative;
+.timeline__event {
   display: grid;
-  grid-template-columns: 190px 1fr;
-  gap: 26px;
-  border-bottom: 1px solid var(--line);
-  padding: 17px 0;
+  grid-template-columns: var(--timeline-columns);
+  gap: var(--timeline-gap);
+  border-block-end: var(--timeline-rule-width) solid var(--line);
+  padding-block: var(--timeline-event-padding);
 }
 
-.timeline .date {
+.timeline__date {
   font-family: var(--serif);
-  font-size: 23px;
+  font-size: var(--timeline-date-size);
   color: var(--amber);
-  line-height: 1.2;
+  line-height: var(--timeline-date-leading);
+  hyphens: auto;
+  overflow-wrap: anywhere;
 }
 
-.timeline h3 {
-  font-size: 24px;
-  margin-bottom: 7px;
+.timeline__title {
+  font-size: var(--timeline-title-size);
+  margin-block-end: var(--timeline-title-gap);
 }
 
-.timeline p {
-  font-size: 14px;
+.timeline__text {
+  font-size: var(--timeline-text-size);
   margin: 0;
 }
 
+.timeline__title,.timeline__text {
+  hyphens: auto;
+  overflow-wrap: anywhere;
+}
+
 .timeline .refs {
-  margin-top: 6px;
+  margin-block-start: var(--timeline-source-gap);
+}
+
+@media screen and (max-width: 35em) {
+  .timeline {
+    --timeline-columns: minmax(0, 1fr);
+    --timeline-gap: .4375rem;
+  }
 }
 
 .table-wrap {
@@ -560,37 +587,49 @@ details p {
 }
 
 .source-grid {
+  --source-grid-row-gap: 1rem;
+  --source-grid-column-gap: 2rem;
+
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px 32px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--source-grid-row-gap) var(--source-grid-column-gap);
 }
 
-.source {
-  padding: 13px 0;
-  border-top: 1px solid var(--line);
+.source-entry {
+  --source-entry-padding: .8125rem;
+  --source-entry-rule-width: 1px;
+  --source-entry-title-size: .8125rem;
+  --source-entry-note-size: .75rem;
+  --source-entry-note-gap: .3125rem;
+  --source-entry-host-size: .625rem;
+  --source-entry-number-gap: .4375rem;
+  --source-entry-title-weight: 700;
+
+  padding-block: var(--source-entry-padding);
+  border-block-start: var(--source-entry-rule-width) solid var(--line);
   break-inside: avoid;
 }
 
-.source b {
-  font-size: 13px;
+.source-entry > :is(.source-trigger, .source-fallback) {
+  font-size: var(--source-entry-title-size);
+  font-weight: var(--source-entry-title-weight);
 }
 
-.source p {
-  font-size: 12px;
+.source-entry > p {
+  font-size: var(--source-entry-note-size);
   color: var(--muted);
-  margin: 5px 0;
+  margin-block: var(--source-entry-note-gap);
 }
 
-.source small {
-  font-size: 10px;
+.source-entry > small {
+  font-size: var(--source-entry-host-size);
   color: var(--muted);
   overflow-wrap: anywhere;
 }
 
-.source-number {
-  color: var(--amber);
-  font-weight: 700;
-  margin-right: 7px;
+.source-entry__number {
+  color: var(--ink);
+  margin-inline-end: var(--source-entry-number-gap);
 }
 
 .compare-picker {
@@ -764,13 +803,6 @@ details p {
   .axes,.ingredients {
     grid-template-columns: 1fr 1fr;
   }
-  .timeline li {
-    grid-template-columns: 130px 1fr;
-    gap: 18px;
-  }
-  .timeline .date {
-    font-size: 20px;
-  }
   .process {
     grid-template-columns: 1fr 1fr;
   }
@@ -822,10 +854,6 @@ details p {
   }
   .intro-links {
     grid-template-columns: 1fr 1fr;
-  }
-  .timeline li {
-    grid-template-columns: 1fr;
-    gap: 8px;
   }
   .layer {
     grid-template-columns: 1fr;
@@ -1022,7 +1050,7 @@ details p {
     grid-template-columns: 1fr 1fr;
     gap: 14px;
   }
-  .style-card p,.card p,.timeline p,.step p,.myth p,.label-example .explain {
+  .style-card p,.card p,.timeline__text,.step p,.myth p,.label-example .explain {
     font-size: 9pt;
   }
   .style-card h3 {
@@ -1031,16 +1059,12 @@ details p {
   .style-sub,.style-stats {
     font-size: 8pt;
   }
-  .timeline li {
-    grid-template-columns: 35mm 1fr;
-    padding: 11px 0;
-    gap: 15px;
-  }
-  .timeline .date {
-    font-size: 14pt;
-  }
-  .timeline h3 {
-    font-size: 15pt;
+  .timeline {
+    --timeline-date-column: 35mm;
+    --timeline-event-padding: 11px;
+    --timeline-gap: 15px;
+    --timeline-date-size: 14pt;
+    --timeline-title-size: 15pt;
   }
   .callout {
     padding: 12px 16px;
@@ -1064,14 +1088,10 @@ details p {
   .refs {
     font-size: 7pt;
   }
-  .source p {
-    font-size: 8pt;
-  }
-  .source b {
-    font-size: 9pt;
-  }
-  .source small {
-    font-size: 7pt;
+  .source-entry {
+    --source-entry-note-size: 8pt;
+    --source-entry-title-size: 9pt;
+    --source-entry-host-size: 7pt;
   }
   .process {
     grid-template-columns: repeat(3,1fr);
